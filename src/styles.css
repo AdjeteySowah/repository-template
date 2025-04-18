@@ -1,0 +1,455 @@
+
+   /* || HOST FONTS */
+@font-face {
+   font-family: "Ubuntu";
+   font-weight: 400;
+   src: url("./assets/fonts/ubuntu-regular-webfont.woff2") format("woff2"),
+        url("./assets/fonts/ubuntu-regular-webfont.woff") format("woff");
+   font-display: swap;
+}
+
+@font-face {
+   font-family: "Ubuntu";
+   font-weight: 500;
+   src: url("./assets/fonts/ubuntu-medium-webfont.woff2") format("woff2"),
+        url("./assets/fonts/ubuntu-medium-webfont.woff") format("woff");
+   font-display: swap;
+}
+
+@font-face {
+   font-family: "Ubuntu";
+   font-weight: 700;
+   src: url("./assets/fonts/ubuntu-bold-webfont.woff2") format("woff2"),
+        url("./assets/fonts/ubuntu-bold-webfont.woff") format("woff");
+   font-display: swap;
+}
+
+
+   /* || RESET */
+*,
+::before,
+::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+html {
+   font-size: 10px;
+   line-height: 1.3;
+}
+
+body {
+   -webkit-font-smoothing: antialiased;
+}
+
+img {
+   display: inline-block;
+   max-width: 100%;
+}
+
+p, h1, h3, input, button {
+   font: inherit;
+   overflow-wrap: break-word;
+}
+
+p {
+   text-wrap: pretty;
+}
+
+h1, h3 {
+   text-wrap: balance;
+}
+
+#root, #__next {
+   isolation: isolate;
+}
+
+
+   /* || CUSTOM PROPERTIES */
+:root {
+   --white: rgb(255, 255, 255);
+   --black: rgb(0, 0, 0);
+   --link-hover-color: rgba(255, 255, 255, 0.75);
+   --primary-gray: rgb(39, 39, 42);
+   --secondary-gray: rgba(109, 109, 121, 0.2);
+   --tertiary-gray: rgba(39, 39, 42, 0.05);
+   --faded-red: rgba(255, 0, 0, 0.25);
+   --faded-green: rgba(0, 255, 0, 0.5);
+   --green: rgb(0, 255, 0);
+   --scrollbar-thumb-color: rgba(0, 0, 0, 0.5);
+}
+
+
+   /* || GENERAL STYLES */
+body {
+   font-family: "Ubuntu", system-ui, serif;
+   font-weight: 400;
+   font-size: 1.6rem;
+   height: 100vh;
+
+   display: grid;
+   grid-template-columns: repeat(9, 1fr);
+   grid-template-areas: 
+      "hd hd hd hd hd hd hd hd hd"
+      "sb sb mn mn mn mn mn mn mn"
+      "ft ft ft ft ft ft ft ft ft";
+   grid-template-rows: 10rem 1fr 5rem;
+}
+
+img {
+   width: 2rem;
+   height: 2rem;
+   vertical-align: middle;
+}
+
+
+   /* || Header */
+.header {
+   grid-area: hd;
+
+   font-weight: 700;
+   font-size: 4rem;
+   background-color: var(--primary-gray);
+   color: var(--white);
+   padding-left: 2rem;
+
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+}
+
+.header__img {
+   width: 4rem;
+   height: 4rem;
+}
+
+
+   /* || Sidebar */
+.sidebar {
+   grid-area: sb;
+
+   background-color: var(--tertiary-gray);
+   padding: 2rem;
+   height: auto;
+   overflow-y: auto;
+   scroll-behavior: smooth;
+
+   display: flex;
+   flex-direction: column;
+   gap: 3rem;
+}
+
+.sidebar__main-item,
+.sidebar__project-item,
+.sidebar__add-project {
+   padding: 1rem;
+   border-radius: 0.5rem;
+}
+
+.sidebar__main-item:hover,
+.sidebar__project-item:hover,
+.sidebar__add-project:hover {
+   cursor: pointer;
+   background-color: var(--secondary-gray);
+}
+
+.sidebar__main-item,
+.sidebar__project-item {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+}
+
+.sidebar__item--project {
+   font-weight: 500;
+   font-size: 2.5rem;
+   margin-bottom: 2rem;
+   padding-left: 1rem;
+}
+
+.sidebar__badge {
+   background-color: var(--primary-gray);
+   color: var(--white);
+   width: 2rem;
+   height: 2rem;
+   border-radius: 50%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   opacity: 0;
+   font-weight: 500;
+}
+
+.sidebar__add-project {
+   margin-top: 2rem;
+}
+
+
+   /* || Main */
+.main-content {
+   grid-area: mn;
+
+   padding: 3rem 10rem;
+   height: auto;
+   overflow-y: auto;
+   scroll-behavior: smooth;
+   scrollbar-gutter: stable;
+}
+
+.main-content__title {
+   font-size: 3rem;
+   font-weight: 700;
+   margin-bottom: 1rem;
+   padding-left: 1rem;
+}
+
+.main-content__no-task-msg {
+   color: var(--green);
+   font-weight: 500;
+   font-size: 2.5rem;
+}
+
+.main-content__task {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   
+   padding: 1rem;
+   margin-bottom: 1rem;
+   border-radius: 0.5rem;
+   background-color: var(--tertiary-gray);
+}
+
+.main-content__task:hover {
+   transform: scale(1.01);
+   box-shadow: 5px 5px 5px 0 var(--secondary-gray);
+}
+
+.main-content__checkbox-label > *:hover,
+.main-content__task-actions > *:hover {
+   cursor: pointer;
+}
+
+.main-content__task-due-date:hover {
+   cursor: default;
+}
+
+.main-content__checkbox-label {
+   display: flex;
+   gap: 1rem;
+}
+
+.main-content__checkbox {
+   accent-color: var(--faded-green);
+}
+
+.main-content__task-actions {
+   display: flex;
+   gap: 2rem;
+}
+
+.main-content__action,
+.new-action {
+   display: flex;
+   gap: 2rem;
+}
+
+.main-content__action--add-task,
+.new-add,
+.new-cancel,
+.main-content__action--delete-project {
+   flex: 1 1 auto;
+
+   font-weight: 500;
+   margin-top: 2rem;
+   padding: 1rem;
+   border-radius: 0.5rem;
+   text-align: center;
+}
+
+.main-content__action--add-task,
+.new-add {
+   background-color: var(--faded-green);
+}
+
+.new-cancel,
+.main-content__action--delete-project {
+   background-color: var(--faded-red);
+}
+
+.input {
+   width: 100%;
+   padding: 1rem;
+   margin-top: 1rem;
+   border: 2px solid var(--black);
+   border-radius: 0.5rem;
+}
+
+.main-content__action--add-task:hover,
+.new-add:hover,
+.new-cancel:hover,
+.main-content__action--delete-project:hover {
+   cursor: pointer;
+}
+
+
+   /* || Footer */
+.footer {
+   grid-area: ft;
+
+   background-color: var(--primary-gray);
+   color: var(--white);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: relative;
+   bottom: 0;
+}
+
+.footer__image {
+   width: 2rem;
+   height: 2rem;
+}
+
+.footer__link {
+   text-decoration: none;
+   color: var(--white);
+}
+
+.footer__link:hover {
+   color: var(--link-hover-color);
+}
+
+
+   /* || DIALOG/MODAL */
+.dialog {
+   margin: auto;
+   padding: 3rem;
+   border: none;
+   width: 45%;
+
+   position: fixed;
+   top: -100%;
+   opacity: 0;
+   animation: none;
+}
+
+.dialog[open] {
+   animation: drop-down 0.5s ease forwards;
+}
+
+.dialog.closing {
+   animation: slide-up 0.5s ease forwards;
+}
+
+@keyframes drop-down {
+   0% {
+      top: -200%;
+      opacity: 0;
+   }
+   70% {
+      top: 20%;
+      opacity: 0.8;
+   }
+   100% {
+      top: 0;
+      opacity: 1;
+   }
+}
+   
+   @keyframes slide-up {
+   0% {
+      top: 0;
+      opacity: 1;
+   }
+   100% {
+      top: -200%;
+      opacity: 0;
+   }
+}
+
+.dialog::backdrop {
+   background-color: var(--scrollbar-thumb-color);
+}
+
+.dialog__form-inputs {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+
+   padding: 2rem;
+   margin-bottom: 2rem;
+   background-color: var(--tertiary-gray);
+   border-radius: 1rem;
+   box-shadow: 0 3px 5px 2px var(--scrollbar-thumb-color);
+}
+
+.dialog__form-inputs :is(label, input, textarea, select) {
+   letter-spacing: 2px;
+}
+
+.dialog__form-inputs :is(input, textarea, select) {
+   width: 100%;
+   border-radius: 0.25rem;
+   border: 1px solid var(--scrollbar-thumb-color);
+   padding: 0.25rem 1rem;
+   font-size: 1.4rem;
+}
+
+.dialog__form-inputs textarea {
+   font-family: "Ubuntu", system-ui, serif;
+   resize: vertical;
+   min-height: 5rem;
+   max-height: 10rem;
+}
+
+.dialog__form-inputs input:focus {
+   border: none;
+   outline: 2px solid var(--primary-gray);
+}
+
+.dialog__form-actions {
+   display: flex;
+   gap: 2rem;
+}
+
+.dialog__form-actions button {
+   padding: 0.5rem 2rem;
+   border: none;
+   border-radius: 0.5rem;
+   background-color: var(--faded-green);
+   color: var(--black);
+   font-weight: 500;
+}
+
+.dialog__form-actions button:nth-child(2) {
+   background-color: var(--faded-red);
+}
+
+.dialog__form-actions button:hover {
+   cursor: pointer;
+   transform: scale(1.1);
+}
+
+
+   /* || INTERACTIONS WITH DOM */
+.active {
+   background-color: var(--secondary-gray);
+}
+
+.bold {
+   font-weight: 500;
+}
+
+.fade > * {
+   opacity: 0.4;
+}
+
+.strike-through {
+   text-decoration: line-through;
+}
+
+.blurred {
+   filter: blur(3px);
+}
